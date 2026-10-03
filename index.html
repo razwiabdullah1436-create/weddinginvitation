@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دعوتِ ولیمہ | محمد بلال و رمیزہ فلک</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --rose:#c82d6d;--deep:#73153d;--gold:#b78a42;--ink:#4b3940;
+ --paper:#fffaf8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{
+ font-family:Montserrat,sans-serif;
+ background:#f8e8ed;color:var(--ink);
+}
+button{font:inherit}
+#app{
+ width:100%;height:100svh;position:relative;overflow:hidden;
+ background:
+ linear-gradient(90deg,rgba(255,249,247,.80),rgba(255,249,247,.76)),
+ url("assets/invitation-bg.png") center/cover;
+}
+.screen{
+ position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+ padding:25px;opacity:0;visibility:hidden;transform:scale(1.035);
+ transition:opacity .75s ease,transform .9s cubic-bezier(.2,.8,.2,1),visibility .75s;
+}
+.screen.active{opacity:1;visibility:visible;transform:scale(1)}
+.card{
+ width:min(760px,94vw);max-height:92svh;overflow:auto;
+ padding:clamp(28px,6vw,70px) clamp(22px,7vw,72px);
+ background:rgba(255,252,250,.72);
+ border:1px solid rgba(183,138,66,.55);
+ box-shadow:0 25px 80px rgba(91,31,53,.12);
+ text-align:center;position:relative;
+ scrollbar-width:none;
+}
+.card::-webkit-scrollbar{display:none}
+.card:before,.card:after{
+ content:"";position:absolute;width:95px;height:95px;
+ border:1px solid rgba(183,138,66,.45);transform:rotate(45deg);
+}
+.card:before{left:-68px;top:-68px}.card:after{right:-68px;bottom:-68px}
+.orn{color:var(--gold);letter-spacing:9px;font-size:18px}
+.small{
+ text-transform:uppercase;letter-spacing:4px;font-size:10px;color:#8e747c;
+}
+h1,h2,.script,.name{font-family:"Cormorant Garamond",serif}
+h1{font-size:clamp(72px,14vw,150px);line-height:.78;color:var(--rose);margin:22px 0}
+h2{font-size:clamp(52px,9vw,100px);color:var(--deep);margin:12px 0}
+.script{font-size:clamp(27px,5vw,42px);color:var(--deep)}
+p{line-height:1.9;font-size:clamp(12px,1.2vw,16px);max-width:720px}
+.btn{
+ border:1px solid rgba(183,138,66,.85);border-radius:999px;
+ background:linear-gradient(135deg,#74163e,#c82d6d);color:white;
+ padding:14px 29px;cursor:pointer;text-transform:uppercase;
+ letter-spacing:2px;font-size:10px;margin-top:22px;
+ box-shadow:0 12px 28px rgba(115,21,61,.18);
+ transition:.3s;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 16px 35px rgba(115,21,61,.25)}
+.btn.ghost{background:transparent;color:var(--deep);box-shadow:none}
+.name{font-size:clamp(48px,9vw,78px);line-height:.8;color:var(--rose);margin:12px 0}
+.parents{font-size:12px;color:#74636a}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:28px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.box{padding:22px 12px;border:1px solid rgba(183,138,66,.3);background:rgba(255,255,255,.4)}
+.box .icon{font-size:25px;color:var(--gold)}
+.box h3{font-family:"Cormorant Garamond",serif;font-size:27px;color:var(--deep);margin:5px 0}
+.box p{font-size:11px;margin:0}
+.progress{
+ position:fixed;z-index:20;left:50%;bottom:19px;transform:translateX(-50%);
+ display:flex;gap:7px;padding:8px 11px;border-radius:30px;
+ background:rgba(255,255,255,.55);backdrop-filter:blur(10px);
+ border:1px solid rgba(183,138,66,.25)
+}
+.dot{width:6px;height:6px;border-radius:50%;background:#d9bfc9;transition:.3s}
+.dot.active{width:22px;border-radius:10px;background:var(--rose)}
+.counter{position:fixed;z-index:20;right:20px;top:18px;color:#9b7d86;font-size:9px;letter-spacing:2px}
+.petal{
+ position:fixed;width:10px;height:15px;background:#ef9db8;border-radius:100% 0;
+ opacity:.35;z-index:1;pointer-events:none;animation:fall linear infinite;
+}
+@keyframes fall{
+ from{transform:translateY(-30px) rotate(0)}
+ to{transform:translate(80px,110vh) rotate(420deg)}
+}
+.reveal{opacity:0;transform:translateY(25px)}
+.active .reveal{animation:reveal .8s forwards}
+.active .r2{animation-delay:.16s}.active .r3{animation-delay:.3s}.active .r4{animation-delay:.44s}
+@keyframes reveal{to{opacity:1;transform:none}}
+.flash{animation:flash .65s ease}
+@keyframes flash{0%{filter:brightness(1)}50%{filter:brightness(1.12)}100%{filter:brightness(1)}}
+@media(max-width:600px){
+ .grid{grid-template-columns:1fr;width:100%}
+ .screen{padding:22px 12px}
+ .card{padding:35px 18px}
+ p{font-size:12px}
+}
+
+.urdu{
+  font-family:"Noto Naskh Arabic",serif;
+  direction:rtl;
+  line-height:1.65;
+}
+.urdu-title{
+  font-family:"Noto Naskh Arabic",serif;
+  direction:rtl;
+  color:var(--rose);
+  font-weight:600;
+  line-height:1.25;
+}
+.urdu-name{
+  font-family:"Noto Naskh Arabic",serif;
+  direction:rtl;
+  color:var(--rose);
+  font-size:clamp(52px,10vw,105px);
+  line-height:1.2;
+  font-weight:600;
+}
+.urdu-small{
+  font-family:"Noto Naskh Arabic",serif;
+  direction:rtl;
+  font-size:clamp(17px,2.2vw,25px);
+  color:#705f66;
+}
+.urdu-btn{
+  font-family:"Noto Naskh Arabic",serif;
+  font-size:15px;
+  letter-spacing:0;
+  padding:10px 30px 13px;
+}
+
+
+/* Premium Urdu wedding typography */
+:root{
+  --heading-font:"Bombay Black","BombayBlack","Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;
+  --urdu-font:"Jameel Noori Nastaleeq","Jameel Noori Nastaleeq Kasheeda","Noto Nastaliq Urdu","Noto Naskh Arabic",serif;
+}
+.urdu-title,.urdu-name,h1,h2{
+  font-family:var(--heading-font) !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+}
+.urdu,.urdu-small,.urdu-btn,.parents,.box h3{
+  font-family:var(--urdu-font) !important;
+  letter-spacing:0 !important;
+}
+.urdu-title{line-height:1.45 !important}
+.urdu-name{line-height:1.45 !important}
+.urdu-btn{line-height:1.4 !important}
+
+
+/* Fix Urdu heading overlap */
+.urdu-title{
+  font-family:var(--heading-font) !important;
+  font-size:clamp(48px,8vw,92px) !important;
+  line-height:1.35 !important;
+  margin:0 0 22px !important;
+  padding:8px 0 14px !important;
+  display:block;
+  position:relative;
+  z-index:3;
+}
+.urdu-small{
+  font-family:var(--urdu-font) !important;
+  font-size:clamp(16px,2vw,24px) !important;
+  line-height:2 !important;
+  margin:8px 0 12px !important;
+  position:relative;
+  z-index:3;
+}
+.screen .card > p{
+  position:relative;
+  z-index:3;
+  margin-top:12px;
+}
+.screen .card > .btn{
+  position:relative;
+  z-index:4;
+  margin-top:28px;
+}
+@media(max-width:600px){
+  .urdu-title{
+    font-size:clamp(42px,13vw,72px) !important;
+    line-height:1.4 !important;
+    margin-bottom:18px !important;
+  }
+  .urdu-small{
+    font-size:18px !important;
+    line-height:2 !important;
+  }
+}
+
+.welcome-title{max-width:100%;margin-bottom:28px !important;} 
+
+@font-face{
+  font-family:"Bombay Black Embedded";
+  src:url("assets/fonts/Bombay-Black.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Jameel Noori Embedded";
+  src:url("assets/fonts/Jameel-Noori-Nastaleeq.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Jameel Noori Kasheeda Embedded";
+  src:url("assets/fonts/Jameel-Noori-Nastaleeq-Kasheeda.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+/* Embedded fonts: these work without installing anything on the phone. */
+.urdu-title,.urdu-name,h1,h2{
+  font-family:"Bombay Black Embedded","Bombay Black",serif !important;
+}
+.urdu,.urdu-small,.urdu-btn,.parents,.box h3{
+  font-family:"Jameel Noori Embedded","Jameel Noori Nastaleeq","Noto Nastaliq Urdu",serif !important;
+}
+.urdu-title{
+  line-height:1.42 !important;
+  margin-bottom:24px !important;
+}
+.urdu-small{
+  line-height:2 !important;
+}
+
+
+.language-screen{z-index:10!important}
+.language-card{gap:10px}
+.language-card h1{font-family:"Cormorant Garamond",serif!important}
+.lang-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.lang-btn{
+  min-width:150px;
+  border:1px solid rgba(183,138,66,.8);
+  border-radius:999px;
+  background:linear-gradient(135deg,#74163e,#c82d6d);
+  color:#fff;
+  padding:14px 28px;
+  cursor:pointer;
+  box-shadow:0 12px 28px rgba(115,21,61,.18);
+}
+.lang-btn.urdu-choice{font-family:"Jameel Noori Embedded","Noto Nastaliq Urdu",serif;font-size:17px;padding-top:9px}
+.lang-btn:hover{transform:translateY(-2px)}
+.lang-back{
+  position:fixed;z-index:30;left:20px;top:18px;
+  border:1px solid rgba(183,138,66,.45);background:rgba(255,255,255,.5);
+  color:#73153d;border-radius:20px;padding:7px 13px;cursor:pointer;
+  backdrop-filter:blur(8px);font-size:10px;
+}
+body.lang-urdu .counter, body.lang-urdu .progress{direction:ltr}
+
+
+.hindi{
+  font-family:"Noto Sans Devanagari","Mangal",sans-serif;
+  direction:ltr;
+  line-height:1.7;
+}
+.hindi-title{
+  font-family:"Noto Sans Devanagari","Mangal",sans-serif !important;
+  direction:ltr;
+  color:var(--deep);
+  line-height:1.45 !important;
+  margin-bottom:24px !important;
+}
+.hindi-choice{
+  font-family:"Noto Sans Devanagari","Mangal",sans-serif !important;
+  font-size:15px;
+}
+
+
+/* Scroll/tutorial overlay */
+.gesture-hint{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+  opacity:0;visibility:hidden;
+  transition:opacity .5s ease,visibility .5s ease;
+  background:rgba(55,10,28,.10);
+}
+.gesture-hint.show{opacity:1;visibility:visible}
+.gesture-inner{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  color:#6f173d;text-align:center;
+  text-shadow:0 1px 12px rgba(255,255,255,.9);
+}
+.finger{
+  width:38px;height:54px;border:3px solid #6f173d;border-radius:22px;
+  position:relative;animation:swipeFinger 1.4s ease-in-out infinite;
+  background:rgba(255,255,255,.55);
+}
+.finger:after{
+  content:"";position:absolute;left:50%;top:-18px;transform:translateX(-50%);
+  width:15px;height:25px;border:3px solid #6f173d;border-bottom:0;
+  border-radius:12px 12px 0 0;background:rgba(255,255,255,.55);
+}
+.swipe-arrow{font-size:28px;animation:arrowMove 1.4s ease-in-out infinite}
+.gesture-text{font-family:Montserrat,sans-serif;font-size:12px;letter-spacing:1.5px}
+.gesture-text-ur{font-family:"Jameel Noori Embedded","Noto Nastaliq Urdu",serif;font-size:18px;direction:rtl}
+@keyframes swipeFinger{
+  0%,100%{transform:translateY(18px)}
+  50%{transform:translateY(-18px)}
+}
+@keyframes arrowMove{
+  0%,100%{transform:translateY(8px);opacity:.45}
+  50%{transform:translateY(-8px);opacity:1}
+}
+/* Branding */
+.branding{
+  margin-top:32px;
+  padding-top:18px;
+  border-top:1px solid rgba(183,138,66,.38);
+  width:min(520px,90vw);
+  text-align:center;
+  color:#6e5660;
+}
+.branding strong{
+  display:block;color:#74163e;
+  font-family:Montserrat,sans-serif;
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;
+}
+.branding .brand-copy{
+  margin:5px 0 8px;
+  font-family:Montserrat,sans-serif;
+  font-size:10px;letter-spacing:.6px;
+}
+.branding a{
+  color:#74163e;text-decoration:none;font-family:Montserrat,sans-serif;
+  font-size:11px;letter-spacing:1px;
+}
+
+
+/* Larger section titles: Groom, Bride, Walima, Venue, etc. */
+.screen .card > .small{
+  font-size:clamp(18px,2.4vw,28px) !important;
+  line-height:1.65 !important;
+  font-weight:600;
+  margin-bottom:10px !important;
+}
+.screen .card > .urdu-small:first-child{
+  font-size:clamp(19px,2.6vw,30px) !important;
+  line-height:1.7 !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="gesture-hint" id="gestureHint" onclick="hideGestureHint()">
+  <div class="gesture-inner">
+    <div class="swipe-arrow">↑</div>
+    <div class="finger"></div>
+    <div class="gesture-text" id="gestureEnglish">Swipe up to continue</div>
+    <div class="gesture-text-ur" id="gestureUrdu" style="display:none">آگے جانے کے لیے اوپر سوائپ کریں</div>
+  </div>
+</div>
+
+<div id="app">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 35%,rgba(255,247,248,.28) 100%);z-index:0"></div>
+  <div class="petal" style="left:8%;animation-duration:9s"></div>
+  <div class="petal" style="left:22%;animation-duration:12s;animation-delay:-4s"></div>
+  <div class="petal" style="left:48%;animation-duration:10s;animation-delay:-7s"></div>
+  <div class="petal" style="left:71%;animation-duration:13s;animation-delay:-2s"></div>
+  <div class="petal" style="left:91%;animation-duration:8s;animation-delay:-5s"></div>
+
+  <!-- Welcome / language selection -->
+  <section class="screen active language-screen" id="languageScreen">
+    <div class="card language-card">
+      <div class="orn reveal">✦ ❦ ✦</div>
+      <div class="small reveal r2">A Special Invitation</div>
+      <h1 class="reveal r3">Welcome</h1>
+      <p class="reveal r4">You are warmly invited to celebrate a beautiful beginning.</p>
+      <div class="small reveal r4" style="margin-top:8px">Please choose your language</div>
+      <div class="lang-buttons reveal r4">
+        <button class="lang-btn" onclick="chooseLanguage('en')">English</button>
+        <button class="lang-btn urdu-choice" onclick="chooseLanguage('ur')">اردو</button>
+        <button class="lang-btn hindi-choice" onclick="chooseLanguage('hi')">हिन्दी</button>
+      </div>
+    </div>
+  </section>
+
+  <button class="lang-back" id="langBack" style="display:none" onclick="goLanguage()">Languages</button>
+  <div class="counter" id="counter" dir="ltr" style="display:none">01 / 08</div>
+  <div class="progress" id="progress" style="display:none"></div>
+
+  <!-- ENGLISH -->
+  <div id="englishFlow" style="display:none">
+    <section class="screen active">
+      <div class="card">
+        <div class="orn reveal">✦ ❦ ✦</div>
+        <div class="small reveal r2">A beautiful beginning</div>
+        <h1 class="reveal r3">Welcome</h1>
+        <p class="reveal r4">You are warmly invited to be part of a celebration filled with love, joy and togetherness.</p>
+        <button class="btn reveal r4" onclick="next()">Open Invitation</button>
+      </div>
+    </section>
+    <section class="screen"><div class="card">
+      <div class="script reveal">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+      <div class="divider reveal r2"></div>
+      <p class="reveal r3">In the name of Allah, the Most Gracious, the Most Merciful.</p>
+      <p class="reveal r4">With gratitude to the Almighty, our families invite you to share in this joyous occasion.</p>
+      <button class="btn reveal r4" onclick="next()">Continue</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="small reveal">The Groom</div><h2 class="reveal r2">Muhammad Bilal</h2>
+      <div class="divider reveal r3"></div><p class="parents reveal r4">Son of Muhammad Shafeeq Abdul Rasheed Sahib, Hingoli Wale</p>
+      <button class="btn reveal r4" onclick="next()">Meet the Bride</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="small reveal">The Bride</div><div class="script reveal r2" style="color:var(--rose)">Noor-e-Chashmi</div>
+      <h2 class="reveal r3">Rameezah Falak</h2><div class="divider reveal r3"></div>
+      <p class="parents reveal r4">Daughter of Abdul Mueen Abdul Raheem Sahib</p>
+      <button class="btn reveal r4" onclick="next()">Our Story</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="orn reveal">❧</div><div class="small reveal r2">A New Chapter</div>
+      <h2 class="reveal r3">Two Hearts.<br>One Beautiful Journey.</h2><div class="divider reveal r3"></div>
+      <p class="reveal r4">Together with our families, we invite you to celebrate this special beginning and bless the couple with your prayers and good wishes.</p>
+      <button class="btn reveal r4" onclick="next()">View Celebration</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="small reveal">Walima Celebration</div><h2 class="reveal r2">Save the Date</h2>
+      <div class="grid"><div class="box reveal r3"><div class="icon">◷</div><h3>Date</h3><p>15 October 2025<br>After Maghrib Prayer</p></div>
+      <div class="box reveal r4"><div class="icon">✦</div><h3>Occasion</h3><p>Walima Celebration<br>With family & loved ones</p></div></div>
+      <button class="btn reveal r4" onclick="next()">Next</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="small reveal">The Venue</div><h2 class="reveal r2">Shehenshah<br>Function Hall</h2><div class="divider reveal r3"></div>
+      <p class="reveal r4">Rahmat Nagar, Parbhani</p>
+      <a class="btn reveal r4" style="display:inline-block;text-decoration:none" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shehenshah+Function+Hall+Parbhani">Open in Maps</a>
+      <br><button class="btn ghost reveal r4" onclick="next()">One Last Thing</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="orn reveal">✦ ❦ ✦</div><div class="small reveal r2">With Love</div>
+      <h2 class="reveal r3">Your Presence<br>Means the World</h2>
+      <p class="reveal r4">Please join us, make memories with us, and keep the newlyweds in your prayers.</p>
+      <div class="script reveal r4" style="color:var(--rose);margin-top:18px">We can't wait to celebrate with you.</div>
+      <button class="btn reveal r4" onclick="goLanguage()">Change Language</button>
+      <div class="branding">
+        <strong>Created by Mr Faizie</strong>
+        <div class="brand-copy">Want an invitation like this for your special occasion?</div>
+        <a href="tel:9322143610">Contact to create yours • 9322143610</a>
+      </div>
+
+    </div></section>
+  </div>
+
+  <!-- URDU -->
+  <div id="urduFlow" style="display:none" dir="rtl">
+    <section class="screen active"><div class="card">
+      <div class="orn reveal">✦ ❦ ✦</div><div class="small reveal r2 urdu">ایک خوبصورت آغاز</div>
+      <h1 class="reveal r3 urdu-title">خوش آمدید</h1>
+      <p class="reveal r4 urdu">آپ کو محبت، خوشی اور اپنوں سے بھرے اس خوبصورت موقع میں شرکت کی دعوت دی جاتی ہے۔</p>
+      <button class="btn urdu-btn reveal r4" onclick="next()">دعوت نامہ کھولیں</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="script reveal urdu">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ</div><div class="divider reveal r2"></div>
+      <p class="reveal r3 urdu">اللہ کے نام سے جو نہایت مہربان، بے حد رحم فرمانے والا ہے۔</p>
+      <p class="reveal r4 urdu">الحمدللہ! ہم اپنے عزیزوں اور دوستوں کو اس خوشی کے موقع پر شرکت کی دعوت دیتے ہیں۔</p>
+      <button class="btn urdu-btn reveal r4" onclick="next()">جاری رکھیں</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="small reveal urdu">دولہا</div><h2 class="reveal r2 urdu-title">محمد بلال</h2><div class="divider reveal r3"></div>
+      <p class="urdu-small reveal r4">محمد شفیق عبدالرشید صاحب، ہنگولی والے کے فرزند</p>
+      <button class="btn urdu-btn reveal r4" onclick="next()">دلہن سے ملیے</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="small reveal urdu">دلہن</div><div class="urdu-small reveal r2">نورِ چشم</div><h2 class="reveal r3 urdu-title">رمیزہ فلک</h2>
+      <div class="divider reveal r3"></div><p class="urdu-small reveal r4">بنت عبدالمعین عبدالرحیم صاحب</p>
+      <button class="btn urdu-btn reveal r4" onclick="next()">ہماری خوشی</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="orn reveal">❧</div><div class="small reveal r2 urdu">ایک نئی شروعات</div>
+      <h2 class="reveal r3 urdu-title">دو دل،<br>ایک خوبصورت سفر</h2><div class="divider reveal r3"></div>
+      <p class="reveal r4 urdu">ہم اپنے خاندان کے ہمراہ آپ کو اس خوشی میں شریک ہونے اور اس نئے سفر کے آغاز پر اپنی دعاؤں سے نوازنے کی دعوت دیتے ہیں۔</p>
+      <button class="btn urdu-btn reveal r4" onclick="next()">تقریب کی تفصیل</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="small reveal urdu">ولیمہ کی تقریب</div><h2 class="reveal r2 urdu-title">تاریخ محفوظ کرلیجیے</h2>
+      <div class="grid"><div class="box reveal r3"><div class="icon">◷</div><h3 class="urdu">تاریخ و وقت</h3><p class="urdu">۱۵ اکتوبر ۲۰۲۵<br>بعد نمازِ مغرب</p></div>
+      <div class="box reveal r4"><div class="icon">✦</div><h3 class="urdu">تقریب</h3><p class="urdu">ولیمہ کی خوشی<br>اہلِ خانہ اور عزیزوں کے ساتھ</p></div></div>
+      <button class="btn urdu-btn reveal r4" onclick="next()">اگلا مرحلہ</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="small reveal urdu">مقامِ تقریب</div><h2 class="reveal r2 urdu-title">شہنشاہ<br>فنکشن ہال</h2><div class="divider reveal r3"></div>
+      <p class="urdu-small reveal r4">رحمت نگر، پربھنی</p>
+      <a class="btn urdu-btn reveal r4" style="display:inline-block;text-decoration:none" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shehenshah+Function+Hall+Parbhani">نقشے میں مقام دیکھیں</a>
+      <br><button class="btn ghost urdu-btn reveal r4" onclick="next()">آخر میں ایک بات</button>
+    </div></section>
+    <section class="screen"><div class="card">
+      <div class="orn reveal">✦ ❦ ✦</div><div class="small reveal r2 urdu">دل کی گہرائیوں سے</div>
+      <h2 class="reveal r3 urdu-title">آپ کی شرکت<br>ہمارے لیے باعثِ مسرت ہے</h2>
+      <p class="reveal r4 urdu">تشریف لائیے، ہمارے ساتھ خوشیاں بانٹیے، خوبصورت یادیں بنائیے اور اس نئے جوڑے کو اپنی دعاؤں میں یاد رکھیے۔</p>
+      <div class="script reveal r4 urdu" style="color:var(--rose);margin-top:18px">ہم آپ کے استقبال کے منتظر ہیں۔</div>
+      <button class="btn urdu-btn reveal r4" onclick="goLanguage()">زبان تبدیل کریں</button>
+      <div class="branding">
+        <strong>Created by Mr Faizie</strong>
+        <div class="brand-copy urdu">اپنے خاص موقع کے لیے ایسا دعوت نامہ بنوانے کے لیے رابطہ کریں</div>
+        <a href="tel:9322143610">Contact • 9322143610</a>
+      </div>
+
+    </div></section>
+  </div>
+
+  <!-- HINDI -->
+  <div id="hindiFlow" style="display:none" dir="ltr">
+    <section class="screen active"><div class="card">
+      <div class="orn reveal">✦ ❦ ✦</div>
+      <div class="small reveal r2 hindi">एक खूबसूरत शुरुआत</div>
+      <h1 class="reveal r3 hindi-title">स्वागत है</h1>
+      <p class="reveal r4 hindi">आपको प्रेम, खुशी और अपनों से भरे इस खूबसूरत अवसर में शामिल होने के लिए सादर आमंत्रित किया जाता है।</p>
+      <button class="btn reveal r4 hindi-choice" onclick="next()">निमंत्रण खोलें</button>
+    </div></section>
+
+    <section class="screen"><div class="card">
+      <div class="script reveal">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+      <div class="divider reveal r2"></div>
+      <p class="reveal r3 hindi">अल्लाह के नाम से, जो अत्यंत कृपालु और दयावान है।</p>
+      <p class="reveal r4 hindi">सर्वशक्तिमान की कृपा से, हमारे परिवार आपको इस शुभ अवसर में शामिल होने के लिए आमंत्रित करते हैं।</p>
+      <button class="btn reveal r4 hindi-choice" onclick="next()">आगे बढ़ें</button>
+    </div></section>
+
+    <section class="screen"><div class="card">
+      <div class="small reveal hindi">दूल्हा</div>
+      <h2 class="reveal r2 hindi-title">मुहम्मद बिलाल</h2>
+      <div class="divider reveal r3"></div>
+      <p class="parents reveal r4 hindi">मुहम्मद शफीक़ अब्दुल रशीद साहब, हिंगोली वाले के सुपुत्र</p>
+      <button class="btn reveal r4 hindi-choice" onclick="next()">दुल्हन से मिलिए</button>
+    </div></section>
+
+    <section class="screen"><div class="card">
+      <div class="small reveal hindi">दुल्हन</div>
+      <div class="urdu-small reveal r2">नूर-ए-चश्मी</div>
+      <h2 class="reveal r3 hindi-title">रमीज़ा फ़लक</h2>
+      <div class="divider reveal r3"></div>
+      <p class="parents reveal r4 hindi">अब्दुल मुईन अब्दुल रहीम साहब की सुपुत्री</p>
+      <button class="btn reveal r4 hindi-choice" onclick="next()">हमारी खुशी</button>
+    </div></section>
+
+    <section class="screen"><div class="card">
+      <div class="orn reveal">❧</div>
+      <div class="small reveal r2 hindi">एक नई शुरुआत</div>
+      <h2 class="reveal r3 hindi-title">दो दिल,<br>एक खूबसूरत सफ़र</h2>
+      <div class="divider reveal r3"></div>
+      <p class="reveal r4 hindi">हम अपने परिवार के साथ आपको इस खुशी में शामिल होने और इस नए सफ़र की शुरुआत पर अपनी शुभकामनाएँ और दुआएँ देने के लिए आमंत्रित करते हैं।</p>
+      <button class="btn reveal r4 hindi-choice" onclick="next()">समारोह की जानकारी</button>
+    </div></section>
+
+    <section class="screen"><div class="card">
+      <div class="small reveal hindi">वलीमा समारोह</div>
+      <h2 class="reveal r2 hindi-title">तारीख़ याद रखें</h2>
+      <div class="grid">
+        <div class="box reveal r3"><div class="icon">◷</div><h3 class="hindi">तारीख़ और समय</h3><p class="hindi">15 अक्टूबर 2025<br>मग़रिब की नमाज़ के बाद</p></div>
+        <div class="box reveal r4"><div class="icon">✦</div><h3 class="hindi">समारोह</h3><p class="hindi">वलीमा समारोह<br>परिवार और प्रियजनों के साथ</p></div>
+      </div>
+      <button class="btn reveal r4 hindi-choice" onclick="next()">अगला चरण</button>
+    </div></section>
+
+    <section class="screen"><div class="card">
+      <div class="small reveal hindi">समारोह का स्थान</div>
+      <h2 class="reveal r2 hindi-title">शहंशाह<br>फंक्शन हॉल</h2>
+      <div class="divider reveal r3"></div>
+      <p class="reveal r4 hindi">रहमत नगर, परभणी</p>
+      <a class="btn reveal r4 hindi-choice" style="display:inline-block;text-decoration:none" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shehenshah+Function+Hall+Parbhani">मैप में स्थान देखें</a>
+      <br><button class="btn ghost reveal r4 hindi-choice" onclick="next()">अंत में एक बात</button>
+    </div></section>
+
+    <section class="screen"><div class="card">
+      <div class="orn reveal">✦ ❦ ✦</div>
+      <div class="small reveal r2 hindi">दिल की गहराइयों से</div>
+      <h2 class="reveal r3 hindi-title">आपकी उपस्थिति<br>हमारे लिए बहुत खास है</h2>
+      <p class="reveal r4 hindi">आइए, हमारे साथ खुशियाँ बाँटिए, खूबसूरत यादें बनाइए और इस नए जोड़े को अपनी दुआओं में याद रखिए।</p>
+      <div class="script reveal r4 hindi" style="color:var(--rose);margin-top:18px">हम आपके स्वागत के लिए उत्सुक हैं।</div>
+      <button class="btn reveal r4 hindi-choice" onclick="goLanguage()">भाषा बदलें</button>
+      <div class="branding">
+        <strong>Created by Mr Faizie</strong>
+        <div class="brand-copy hindi">अपने खास अवसर के लिए ऐसा निमंत्रण बनवाने के लिए संपर्क करें</div>
+        <a href="tel:9322143610">Contact • 9322143610</a>
+      </div>
+
+    </div></section>
+  </div>
+</div>
+
+<script>
+let language = null;
+let current = 0;
+let screens = [];
+let dots = [];
+let tutorialShown = false;
+const gestureHint = document.getElementById('gestureHint');
+const gestureEnglish = document.getElementById('gestureEnglish');
+const gestureUrdu = document.getElementById('gestureUrdu');
+
+function showGestureHint(){
+  if(tutorialShown || !language) return;
+  tutorialShown = true;
+  gestureEnglish.style.display = language === 'ur' ? 'none' : 'block';
+  gestureUrdu.style.display = language === 'ur' ? 'block' : 'none';
+  gestureHint.classList.add('show');
+  setTimeout(hideGestureHint, 3200);
+}
+function hideGestureHint(){
+  gestureHint.classList.remove('show');
+}
+
+const languageScreen = document.getElementById('languageScreen');
+const englishFlow = document.getElementById('englishFlow');
+const urduFlow = document.getElementById('urduFlow');
+const hindiFlow = document.getElementById('hindiFlow');
+const counter = document.getElementById('counter');
+const progress = document.getElementById('progress');
+const langBack = document.getElementById('langBack');
+
+function setupFlow(){
+  const activeFlow = language === 'en' ? englishFlow : (language === 'ur' ? urduFlow : hindiFlow);
+  screens = [...activeFlow.querySelectorAll('.screen')];
+  progress.innerHTML = '';
+  screens.forEach((_,i)=>{
+    const d=document.createElement('span');
+    d.className='dot'+(i===0?' active':'');
+    progress.appendChild(d);
+  });
+  dots=[...progress.querySelectorAll('.dot')];
+  current=0;
+  render();
+}
+function chooseLanguage(lang){
+  language=lang;
+  document.body.classList.toggle('lang-urdu',lang==='ur');
+  languageScreen.classList.remove('active');
+  englishFlow.style.display=lang==='en'?'block':'none';
+  urduFlow.style.display=lang==='ur'?'block':'none';
+  hindiFlow.style.display=lang==='hi'?'block':'none';
+  counter.style.display='block';
+  progress.style.display='flex';
+  langBack.style.display='block';
+  setupFlow();
+  setTimeout(showGestureHint, 450);
+}
+function render(){
+  screens.forEach((s,i)=>s.classList.toggle('active',i===current));
+  dots.forEach((d,i)=>d.classList.toggle('active',i===current));
+  counter.textContent=String(current+1).padStart(2,'0')+' / '+String(screens.length).padStart(2,'0');
+}
+function next(){if(current<screens.length-1){current++;render()}}
+function goLanguage(){
+  language=null; current=0; tutorialShown=false;
+  englishFlow.style.display='none'; urduFlow.style.display='none'; hindiFlow.style.display='none';
+  languageScreen.classList.add('active');
+  counter.style.display='none'; progress.style.display='none'; langBack.style.display='none';
+  document.body.classList.remove('lang-urdu');
+}
+document.addEventListener('keydown',e=>{
+  if(!language)return;
+  if(e.key==='ArrowRight'||e.key==='Enter')next();
+  if(e.key==='ArrowLeft'&&current>0){current--;render()}
+});
+let sx=0;
+document.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{
+  if(!language)return;
+  const dx=e.changedTouches[0].clientX-sx;
+  if(Math.abs(dx)>60){dx<0?next():(current>0&&(current--,render()))}
+},{passive:true});
+</script>
+</body>
+
+</html>
